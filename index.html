@@ -5,97 +5,155 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         :root {
-            --neon-color: #00f2ff;
-            --accent-color: #7000ff;
+            --orange: #ff6600;
+            --fire-glow: #ff4500;
+            --dark-bg: rgba(0, 0, 0, 0.85);
         }
 
         body {
             margin: 0;
             padding: 0;
+            width: 1920px;
+            height: 1080px;
             overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: transparent;
+            font-family: 'Arial Black', Gadget, sans-serif;
+            background: transparent; /* Ensures transparency in OBS/Prism */
         }
 
-        /* Animated Border Frame */
-        .border-container {
+        /* Layout Container - Anchored to Bottom */
+        .bottom-overlay {
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            box-sizing: border-box;
-            border: 4px solid var(--neon-color);
-            box-shadow: inset 0 0 15px var(--neon-color), 0 0 15px var(--neon-color);
-            animation: pulse 2s infinite alternate;
+            width: 1920px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        @keyframes pulse {
-            from { opacity: 0.6; filter: hue-rotate(0deg); }
-            to { opacity: 1; filter: hue-rotate(45deg); }
+        /* Grouping Title and Logo */
+        .main-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            position: relative;
         }
 
-        /* Social Ticker */
-        .ticker-wrap {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.7);
+        /* Logo Placeholder */
+        .logo-placeholder {
+            width: 100px;
+            height: 100px;
+            background: #111;
+            border: 4px solid var(--orange);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            padding: 10px 0;
+            font-size: 18px;
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
+            z-index: 5;
+        }
+
+        /* Main Text Container */
+        .text-box {
+            position: relative;
+            padding: 15px 40px;
+            background: var(--dark-bg);
+            border: 4px solid #000;
+            border-radius: 10px;
+            z-index: 5;
+        }
+
+        .main-title {
+            font-size: 64px;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin: 0;
+            /* Heavy black outline for visibility */
+            text-shadow: 
+                3px 3px 0px #000, 
+                -3px -3px 0px #000, 
+                3px -3px 0px #000, 
+                -3px 3px 0px #000,
+                0 0 15px rgba(255, 102, 0, 0.5);
+        }
+
+        /* Fire Glow Background Effect (Every 10 Seconds) */
+        .fire-bg {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: radial-gradient(circle, var(--fire-glow) 0%, transparent 70%);
+            filter: blur(40px);
+            opacity: 0;
+            z-index: 1;
+            animation: firePulse 10s infinite;
+        }
+
+        @keyframes firePulse {
+            0% { opacity: 0; transform: scale(0.8); }
+            85% { opacity: 0; transform: scale(0.8); } /* Wait 8.5 seconds */
+            90% { opacity: 0.9; transform: scale(1.1); } /* Flare up */
+            95% { opacity: 1; transform: scale(1.2); filter: blur(50px); }
+            100% { opacity: 0; transform: scale(1); }
+        }
+
+        /* Bottom Ticker */
+        .ticker-wrap {
+            width: 100%;
+            background: #000;
+            color: white;
+            padding: 15px 0;
+            border-top: 4px solid var(--orange);
             overflow: hidden;
-            border-top: 2px solid var(--accent-color);
         }
 
         .ticker {
             display: inline-block;
             white-space: nowrap;
-            animation: scroll 15s linear infinite;
+            animation: scroll 20s linear infinite;
         }
 
         @keyframes scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+            from { transform: translateX(1920px); }
+            to { transform: translateX(-100%); }
         }
 
         .ticker-item {
             display: inline-block;
-            padding: 0 50px;
+            padding: 0 60px;
+            font-size: 28px;
             font-weight: bold;
-            text-transform: uppercase;
             letter-spacing: 2px;
-        }
-
-        /* Minimalist Cam Frame (Optional) */
-        .cam-frame {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 120px;
-            height: 160px;
-            border: 2px solid white;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 10px;
         }
     </style>
 </head>
 <body>
 
-    <div class="border-container"></div>
-
-    <div class="cam-frame">CAMERA HERE</div>
-
-    <div class="ticker-wrap">
-        <div class="ticker">
-            <span class="ticker-item">🌟 NEW FOLLOWER: GamingBeast</span>
-            <span class="ticker-item">📸 INSTAGRAM: @YourHandle</span>
-            <span class="ticker-item">🎮 DISCORD: discord.gg/invite</span>
-            <span class="ticker-item">🔥 TOP DONO: $50.00 - Legend</span>
+    <div class="bottom-overlay">
+        
+        <div class="main-info">
+            <div class="logo-placeholder">LOGO</div>
+            
+            <div class="text-box">
+                <div class="fire-bg"></div>
+                <h1 class="main-title">HILLS PAID SCRIMS</h1>
+            </div>
         </div>
+
+        <div class="ticker-wrap">
+            <div class="ticker">
+                <span class="ticker-item">🔥 REGISTRATION OPEN</span>
+                <span class="ticker-item">💰 PRIZE POOL: $100</span>
+                <span class="ticker-item">📺 WATCH LIVE ON MOBILE</span>
+                <span class="ticker-item">🎮 NEXT MATCH AT 8PM</span>
+            </div>
+        </div>
+
     </div>
 
 </body>
