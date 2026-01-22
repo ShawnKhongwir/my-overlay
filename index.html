@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        /* This links your custom font file to the code */
+        @font-face {
+            font-family: 'Pricedown';
+            src: url('Pricedown Bl.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         :root {
             --orange: #ff6600;
             --fire-glow: #ff4500;
@@ -14,7 +22,6 @@
             margin: 0; padding: 0;
             width: 1920px; height: 1080px;
             overflow: hidden;
-            font-family: 'Arial Black', Gadget, sans-serif;
             background: transparent; 
         }
 
@@ -30,7 +37,7 @@
         }
 
         .logo-placeholder {
-            width: 100px; height: 100px;
+            width: 110px; height: 110px;
             background: #111;
             border: 4px solid var(--orange);
             border-radius: 12px;
@@ -41,17 +48,21 @@
         }
 
         .text-box {
-            position: relative; padding: 15px 40px;
+            position: relative; padding: 15px 45px;
             background: var(--dark-bg);
             border: 4px solid #000; border-radius: 10px;
             z-index: 5;
         }
 
         .main-title {
-            font-size: 64px; color: var(--orange);
+            /* Applying the custom font here */
+            font-family: 'Pricedown', sans-serif;
+            font-size: 80px; /* Pricedown often looks better a bit larger */
+            color: var(--orange);
             text-transform: uppercase; margin: 0;
-            text-shadow: 3px 3px 0px #000, -3px -3px 0px #000, 3px -3px 0px #000, -3px 3px 0px #000, 0 0 15px rgba(255, 102, 0, 0.5);
-            outline: none; /* Keeps it clean when clicking */
+            text-shadow: 4px 4px 0px #000, -2px -2px 0px #000, 4px -2px 0px #000, -2px 4px 0px #000, 0 0 20px rgba(255, 102, 0, 0.6);
+            outline: none;
+            letter-spacing: 2px;
         }
 
         .fire-bg {
@@ -72,11 +83,12 @@
             width: 100%; background: #000; color: white;
             padding: 15px 0; border-top: 4px solid var(--orange);
             overflow: hidden;
+            font-family: 'Arial Black', Gadget, sans-serif; /* Ticker stays readable */
         }
 
         .ticker {
             display: inline-block; white-space: nowrap;
-            animation: scroll 20s linear infinite;
+            animation: scroll 25s linear infinite;
         }
 
         @keyframes scroll {
