@@ -11,110 +11,71 @@
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            width: 1920px;
-            height: 1080px;
+            margin: 0; padding: 0;
+            width: 1920px; height: 1080px;
             overflow: hidden;
             font-family: 'Arial Black', Gadget, sans-serif;
-            background: transparent; /* Ensures transparency in OBS/Prism */
+            background: transparent; 
         }
 
-        /* Layout Container - Anchored to Bottom */
         .bottom-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
+            position: absolute; bottom: 0; left: 0;
             width: 1920px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; flex-direction: column; align-items: center;
         }
 
-        /* Grouping Title and Logo */
         .main-info {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 20px;
-            position: relative;
+            display: flex; align-items: center; gap: 20px;
+            margin-bottom: 20px; position: relative;
         }
 
-        /* Logo Placeholder */
         .logo-placeholder {
-            width: 100px;
-            height: 100px;
+            width: 100px; height: 100px;
             background: #111;
             border: 4px solid var(--orange);
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
+            display: flex; align-items: center; justify-content: center;
             box-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
             z-index: 5;
+            overflow: hidden;
         }
 
-        /* Main Text Container */
         .text-box {
-            position: relative;
-            padding: 15px 40px;
+            position: relative; padding: 15px 40px;
             background: var(--dark-bg);
-            border: 4px solid #000;
-            border-radius: 10px;
+            border: 4px solid #000; border-radius: 10px;
             z-index: 5;
         }
 
         .main-title {
-            font-size: 64px;
-            color: var(--orange);
-            text-transform: uppercase;
-            margin: 0;
-            /* Heavy black outline for visibility */
-            text-shadow: 
-                3px 3px 0px #000, 
-                -3px -3px 0px #000, 
-                3px -3px 0px #000, 
-                -3px 3px 0px #000,
-                0 0 15px rgba(255, 102, 0, 0.5);
+            font-size: 64px; color: var(--orange);
+            text-transform: uppercase; margin: 0;
+            text-shadow: 3px 3px 0px #000, -3px -3px 0px #000, 3px -3px 0px #000, -3px 3px 0px #000, 0 0 15px rgba(255, 102, 0, 0.5);
+            outline: none;
         }
 
-        /* Fire Glow Background Effect (Every 10 Seconds) */
         .fire-bg {
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            right: -20px;
-            bottom: -20px;
+            position: absolute; top: -20px; left: -20px; right: -20px; bottom: -20px;
             background: radial-gradient(circle, var(--fire-glow) 0%, transparent 70%);
-            filter: blur(40px);
-            opacity: 0;
-            z-index: 1;
+            filter: blur(40px); opacity: 0; z-index: 1;
             animation: firePulse 10s infinite;
         }
 
         @keyframes firePulse {
-            0% { opacity: 0; transform: scale(0.8); }
-            85% { opacity: 0; transform: scale(0.8); } /* Wait 8.5 seconds */
-            90% { opacity: 0.9; transform: scale(1.1); } /* Flare up */
+            0%, 85% { opacity: 0; transform: scale(0.8); }
+            90% { opacity: 0.9; transform: scale(1.1); }
             95% { opacity: 1; transform: scale(1.2); filter: blur(50px); }
             100% { opacity: 0; transform: scale(1); }
         }
 
-        /* Bottom Ticker */
         .ticker-wrap {
-            width: 100%;
-            background: #000;
-            color: white;
-            padding: 15px 0;
-            border-top: 4px solid var(--orange);
+            width: 100%; background: #000; color: white;
+            padding: 15px 0; border-top: 4px solid var(--orange);
             overflow: hidden;
         }
 
         .ticker {
-            display: inline-block;
-            white-space: nowrap;
+            display: inline-block; white-space: nowrap;
             animation: scroll 20s linear infinite;
         }
 
@@ -124,39 +85,70 @@
         }
 
         .ticker-item {
-            display: inline-block;
-            padding: 0 60px;
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 2px;
+            display: inline-block; padding: 0 60px;
+            font-size: 28px; font-weight: bold; letter-spacing: 2px;
+            outline: none;
+        }
+
+        /* Edit Controls */
+        #admin-panel {
+            position: fixed; top: 10px; left: 10px; z-index: 1000;
+            background: rgba(0,0,0,0.8); padding: 10px; border-radius: 5px;
+            border: 1px solid var(--orange);
+        }
+        button {
+            background: var(--orange); color: white; border: none;
+            padding: 5px 15px; cursor: pointer; font-weight: bold;
         }
     </style>
 </head>
 <body>
 
+    <div id="admin-panel">
+        <button onclick="saveContent()">SAVE TEXT CHANGES</button>
+        <p style="color: white; font-size: 10px; margin-top: 5px;">Click text below to edit, then click Save.</p>
+    </div>
+
     <div class="bottom-overlay">
-        
         <div class="main-info">
             <div class="logo-placeholder">
-                <img src="ASD.jpeg" alt="Logo" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+                <img src="ASD.jpeg" alt="Logo" style="width:100%; height:100%; object-fit:cover;">
             </div>
             
             <div class="text-box">
                 <div class="fire-bg"></div>
-                <h1 class="main-title">HILLS PAID SCRIMS</h1>
+                <h1 class="main-title" id="editableTitle" contenteditable="true">HILLS PAID SCRIMS</h1>
             </div>
         </div>
 
         <div class="ticker-wrap">
-            <div class="ticker">
-                <span class="ticker-item">🔥 REGISTRATION OPEN</span>
-                <span class="ticker-item">💰 PRIZE POOL: 500</span>
-                <span class="ticker-item">📺 WATCH LIVE ON MOBILE</span>
-                <span class="ticker-item">🎮 NEXT MATCH AT: Check Whatsapp Group</span>
+            <div class="ticker" id="editableTicker">
+                <span class="ticker-item" contenteditable="true">🔥 REGISTRATION OPEN</span>
+                <span class="ticker-item" contenteditable="true">💰 PRIZE POOL: 500</span>
+                <span class="ticker-item" contenteditable="true">📺 WATCH LIVE ON MOBILE</span>
+                <span class="ticker-item" contenteditable="true">🎮 NEXT MATCH AT: Check Whatsapp Group</span>
             </div>
         </div>
-
     </div>
+
+    <script>
+        // Load saved content
+        window.onload = () => {
+            if(localStorage.getItem('scrimTitle')) 
+                document.getElementById('editableTitle').innerHTML = localStorage.getItem('scrimTitle');
+            if(localStorage.getItem('scrimTicker')) 
+                document.getElementById('editableTicker').innerHTML = localStorage.getItem('scrimTicker');
+        };
+
+        // Save content to browser memory
+        function saveContent() {
+            const title = document.getElementById('editableTitle').innerHTML;
+            const ticker = document.getElementById('editableTicker').innerHTML;
+            localStorage.setItem('scrimTitle', title);
+            localStorage.setItem('scrimTicker', ticker);
+            alert("Changes saved to your browser!");
+        }
+    </script>
 
 </body>
 </html>
