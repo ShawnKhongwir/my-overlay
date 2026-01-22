@@ -51,7 +51,7 @@
             font-size: 64px; color: var(--orange);
             text-transform: uppercase; margin: 0;
             text-shadow: 3px 3px 0px #000, -3px -3px 0px #000, 3px -3px 0px #000, -3px 3px 0px #000, 0 0 15px rgba(255, 102, 0, 0.5);
-            outline: none;
+            outline: none; /* Keeps it clean when clicking */
         }
 
         .fire-bg {
@@ -89,25 +89,9 @@
             font-size: 28px; font-weight: bold; letter-spacing: 2px;
             outline: none;
         }
-
-        /* Edit Controls */
-        #admin-panel {
-            position: fixed; top: 10px; left: 10px; z-index: 1000;
-            background: rgba(0,0,0,0.8); padding: 10px; border-radius: 5px;
-            border: 1px solid var(--orange);
-        }
-        button {
-            background: var(--orange); color: white; border: none;
-            padding: 5px 15px; cursor: pointer; font-weight: bold;
-        }
     </style>
 </head>
 <body>
-
-    <div id="admin-panel">
-        <button onclick="saveContent()">SAVE TEXT CHANGES</button>
-        <p style="color: white; font-size: 10px; margin-top: 5px;">Click text below to edit, then click Save.</p>
-    </div>
 
     <div class="bottom-overlay">
         <div class="main-info">
@@ -117,12 +101,12 @@
             
             <div class="text-box">
                 <div class="fire-bg"></div>
-                <h1 class="main-title" id="editableTitle" contenteditable="true">HILLS PAID SCRIMS</h1>
+                <h1 class="main-title" contenteditable="true">HILLS PAID SCRIMS</h1>
             </div>
         </div>
 
         <div class="ticker-wrap">
-            <div class="ticker" id="editableTicker">
+            <div class="ticker">
                 <span class="ticker-item" contenteditable="true">🔥 REGISTRATION OPEN</span>
                 <span class="ticker-item" contenteditable="true">💰 PRIZE POOL: 500</span>
                 <span class="ticker-item" contenteditable="true">📺 WATCH LIVE ON MOBILE</span>
@@ -130,25 +114,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Load saved content
-        window.onload = () => {
-            if(localStorage.getItem('scrimTitle')) 
-                document.getElementById('editableTitle').innerHTML = localStorage.getItem('scrimTitle');
-            if(localStorage.getItem('scrimTicker')) 
-                document.getElementById('editableTicker').innerHTML = localStorage.getItem('scrimTicker');
-        };
-
-        // Save content to browser memory
-        function saveContent() {
-            const title = document.getElementById('editableTitle').innerHTML;
-            const ticker = document.getElementById('editableTicker').innerHTML;
-            localStorage.setItem('scrimTitle', title);
-            localStorage.setItem('scrimTicker', ticker);
-            alert("Changes saved to your browser!");
-        }
-    </script>
 
 </body>
 </html>
