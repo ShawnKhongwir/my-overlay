@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Custom Font Integration */
         @font-face {
             font-family: 'Pricedown';
             src: url('Pricedown Bl.otf') format('opentype');
@@ -16,6 +15,8 @@
             --orange: #ff6600;
             --fire-glow: #ff4500;
             --dark-bg: rgba(0, 0, 0, 0.85);
+            /* Added a blue glow to match your logo's circuit lines */
+            --logo-glow: rgba(0, 183, 255, 0.6); 
         }
 
         body {
@@ -32,26 +33,26 @@
         }
 
         .main-info {
-            display: flex; align-items: center; gap: 20px;
+            display: flex; align-items: center; gap: 30px;
             margin-bottom: 20px; position: relative;
         }
 
-        /* Logo Styling - Updated for hills_logo.jpg */
-        .logo-placeholder {
-            width: 120px; height: 120px;
-            background: #111;
-            border: 4px solid var(--orange);
-            border-radius: 50%; /* Circle looks great with your gear logo */
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 25px rgba(255, 102, 0, 0.6);
+        /* Adjusted for Transparent PNG */
+        .logo-container {
+            width: 150px; /* Slightly larger to show detail */
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             z-index: 5;
-            overflow: hidden;
+            /* Blue glow effect behind the transparent logo */
+            filter: drop-shadow(0 0 15px var(--logo-glow));
         }
 
-        .logo-placeholder img {
+        .logo-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Keeps the gear shape perfect */
         }
 
         .text-box {
@@ -113,7 +114,7 @@
 
     <div class="bottom-overlay">
         <div class="main-info">
-            <div class="logo-placeholder">
+            <div class="logo-container">
                 <img src="hills_logo.png" alt="Hills Shillong Logo">
             </div>
             
@@ -129,6 +130,7 @@
                 <span class="ticker-item" contenteditable="true">💰 PRIZE POOL: 500</span>
                 <span class="ticker-item" contenteditable="true">📺 WATCH LIVE ON MOBILE</span>
                 <span class="ticker-item" contenteditable="true">🎮 NEXT MATCH AT: Check Whatsapp Group</span>
+                <span class="ticker-item" contenteditable="true">❤️ LIKE AND SUB</span>
             </div>
         </div>
     </div>
