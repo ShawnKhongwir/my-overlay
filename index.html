@@ -12,7 +12,7 @@
         }
 
         :root {
-            /* THEME: Deep Blue & Gold/Cyan from your logo */
+            /* THEME: Deep Blue & Gold/Cyan */
             --tech-cyan: #00f2ff;       
             --tech-gold: #ffaa00;       
             --deep-blue: #001a33;       
@@ -22,33 +22,24 @@
         body {
             margin: 0; padding: 0;
             width: 1920px; 
-            height: 100vh; /* Full height to allow bottom alignment */
+            height: 194px; /* Exact height requested */
             overflow: hidden;
             background: transparent; 
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; /* Pushes everything to the bottom */
+            justify-content: flex-end; /* Pushes content to bottom */
         }
 
-        /* MASTER CONTAINER: 1920x194px Fixed Size */
-        .overlay-container {
-            width: 1920px;
-            height: 194px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        /* TOP ROW: Logo + Title */
+        /* TOP ROW: Logo + Title -> CENTERED */
         .top-row {
             display: flex;
             align-items: center;
+            justify-content: center; /* THIS CENTERS EVERYTHING */
             height: 140px; 
-            padding-left: 40px; 
             gap: 25px;
-            /* Gradient fade behind the title area */
-            background: linear-gradient(90deg, rgba(0,26,51,0.8) 0%, rgba(0,0,0,0) 60%);
+            width: 100%;
+            /* Optional: Subtle gradient behind the center area */
+            background: radial-gradient(ellipse at center, rgba(0,26,51,0.8) 0%, rgba(0,0,0,0) 70%);
         }
 
         /* LOGO STYLING */
@@ -59,8 +50,7 @@
             align-items: center;
             justify-content: center;
             z-index: 10;
-            /* Cyan glow matching the circuit lines */
-            filter: drop-shadow(0 0 8px var(--tech-cyan));
+            filter: drop-shadow(0 0 10px var(--tech-cyan));
         }
 
         .logo-container img {
@@ -71,14 +61,16 @@
         /* TITLE BOX */
         .text-box {
             position: relative;
-            /* This skew creates the "Speed/Sport" angle */
+            /* Skew for speed effect */
             transform: skewX(-10deg); 
             padding: 5px 20px;
-            border-left: 5px solid var(--tech-gold);
+            /* Borders on both sides for balance since it's centered */
+            border-left: 4px solid var(--tech-gold);
+            border-right: 4px solid var(--tech-gold);
         }
 
         .main-title {
-            /* Counter-skew to make text straight again */
+            /* Counter-skew text */
             transform: skewX(10deg); 
             font-family: 'Pricedown', sans-serif;
             font-size: 80px; 
@@ -91,9 +83,9 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             
-            /* Sharp shadow for readability */
             filter: drop-shadow(4px 4px 0px #000);
             letter-spacing: 2px;
+            text-align: center;
         }
 
         /* TICKER BAR */
@@ -102,7 +94,7 @@
             height: 44px;
             background: #000;
             border-top: 3px solid var(--tech-gold);
-            border-bottom: 3px solid var(--tech-cyan); /* Double border theme */
+            border-bottom: 3px solid var(--tech-cyan); 
             display: flex;
             align-items: center;
             overflow: hidden;
@@ -137,25 +129,23 @@
 </head>
 <body>
 
-    <div class="overlay-container">
-        <div class="top-row">
-            <div class="logo-container">
-                <img src="hills_logo.png" alt="Logo Missing">
-            </div>
-            
-            <div class="text-box">
-                <h1 class="main-title" contenteditable="true">HILLS PAID SCRIMS</h1>
-            </div>
+    <div class="top-row">
+        <div class="logo-container">
+            <img src="hills_logo.png" alt="Hills Shillong Logo">
         </div>
+        
+        <div class="text-box">
+            <h1 class="main-title" contenteditable="true">HILLS PAID SCRIMS</h1>
+        </div>
+    </div>
 
-        <div class="ticker-wrap">
-            <div class="ticker">
-                <span class="ticker-item" contenteditable="true">🔥 REGISTRATION OPEN</span>
-                <span class="ticker-item" contenteditable="true"><span class="gold-text">💰</span> PRIZE POOL: <span class="cyan-text">500</span></span>
-                <span class="ticker-item" contenteditable="true">📺 WATCH LIVE ON MOBILE</span>
-                <span class="ticker-item" contenteditable="true">🎮 NEXT MATCH: <span class="gold-text">Check WhatsApp</span></span>
-                <span class="ticker-item" contenteditable="true">❤️ LIKE AND SUBSCRIBE</span>
-            </div>
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span class="ticker-item" contenteditable="true">🔥 REGISTRATION OPEN</span>
+            <span class="ticker-item" contenteditable="true"><span class="gold-text">💰</span> PRIZE POOL: <span class="cyan-text">500</span></span>
+            <span class="ticker-item" contenteditable="true">📺 WATCH LIVE ON MOBILE</span>
+            <span class="ticker-item" contenteditable="true">🎮 NEXT MATCH: <span class="gold-text">Check WhatsApp</span></span>
+            <span class="ticker-item" contenteditable="true">❤️ LIKE AND SUBSCRIBE</span>
         </div>
     </div>
 
