@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        /* Load Custom Font */
         @font-face {
             font-family: 'Pricedown';
             src: url('Pricedown Bl.otf') format('opentype');
@@ -12,126 +13,145 @@
         }
 
         :root {
-            --orange: #ff6600;
-            --fire-glow: #ff4500;
-            --dark-bg: rgba(0, 0, 0, 0.85);
-            /* Added a blue glow to match your logo's circuit lines */
-            --logo-glow: rgba(0, 183, 255, 0.6); 
+            /* COLORS EXTRACTED FROM LOGO */
+            --tech-cyan: #00f2ff;       /* Bright blue from the circuit lines */
+            --tech-gold: #ffaa00;       /* Gold/Orange from the rings */
+            --deep-blue: #001a33;       /* Dark background blue */
+            --dark-bg: rgba(0, 0, 0, 0.9);
         }
 
         body {
             margin: 0; padding: 0;
-            width: 1920px; height: 1080px;
+            width: 1920px; 
+            height: 194px; /* Exact height requested */
             overflow: hidden;
             background: transparent; 
+            /* Align content to the bottom of the window */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
 
-        .bottom-overlay {
-            position: absolute; bottom: 0; left: 0;
-            width: 1920px;
-            display: flex; flex-direction: column; align-items: center;
+        /* Container for the Logo and Main Title */
+        .top-row {
+            display: flex;
+            align-items: center;
+            height: 144px; /* Remaining height above ticker */
+            padding-left: 50px; /* Space from left edge */
+            gap: 20px;
         }
 
-        .main-info {
-            display: flex; align-items: center; gap: 30px;
-            margin-bottom: 20px; position: relative;
-        }
-
-        /* Adjusted for Transparent PNG */
+        /* Logo Styling */
         .logo-container {
-            width: 150px; /* Slightly larger to show detail */
-            height: 150px;
+            width: 130px; 
+            height: 130px;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 5;
-            /* Blue glow effect behind the transparent logo */
-            filter: drop-shadow(0 0 15px var(--logo-glow));
+            z-index: 10;
+            /* Cyan glow matching the logo's tech feel */
+            filter: drop-shadow(0 0 10px var(--tech-cyan));
         }
 
         .logo-container img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Keeps the gear shape perfect */
+            object-fit: contain;
         }
 
+        /* Main Title Box */
         .text-box {
-            position: relative; padding: 15px 45px;
-            background: var(--dark-bg);
-            border: 4px solid #000; border-radius: 10px;
+            position: relative;
+            padding: 5px 30px;
+            background: linear-gradient(90deg, var(--deep-blue) 0%, rgba(0,0,0,0.8) 100%);
+            border: 2px solid var(--tech-cyan); /* Blue border */
+            border-left: 6px solid var(--tech-gold); /* Gold accent on left */
+            border-radius: 8px;
+            transform: skewX(-10deg); /* Slight tech slant */
+            display: flex;
+            align-items: center;
+        }
+
+        /* Correct skew for text inside box */
+        .main-title {
+            transform: skewX(10deg); 
+            font-family: 'Pricedown', sans-serif;
+            font-size: 75px; /* Sized to fit 194px height */
+            margin: 0;
+            line-height: 1;
+            outline: none;
+            
+            /* METALLIC CYAN TEXT GRADIENT (Matches Logo Text) */
+            background: linear-gradient(180deg, #ffffff 20%, var(--tech-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            /* Text Stroke/Shadow for readability */
+            filter: drop-shadow(3px 3px 0px #000);
+        }
+
+        /* Ticker Area */
+        .ticker-wrap {
+            width: 100%;
+            height: 50px; /* Fixed height for bottom strip */
+            background: #000;
+            border-top: 3px solid var(--tech-gold); /* Gold line separating ticker */
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Arial Black', Gadget, sans-serif;
+            color: white;
+            position: relative;
             z-index: 5;
         }
 
-        .main-title {
-            font-family: 'Pricedown', sans-serif;
-            font-size: 85px; 
-            color: var(--orange);
-            text-transform: uppercase; margin: 0;
-            text-shadow: 4px 4px 0px #000, -2px -2px 0px #000, 4px -2px 0px #000, -2px 4px 0px #000, 0 0 20px rgba(255, 102, 0, 0.6);
-            outline: none;
-            letter-spacing: 2px;
-        }
-
-        .fire-bg {
-            position: absolute; top: -20px; left: -20px; right: -20px; bottom: -20px;
-            background: radial-gradient(circle, var(--fire-glow) 0%, transparent 70%);
-            filter: blur(40px); opacity: 0; z-index: 1;
-            animation: firePulse 10s infinite;
-        }
-
-        @keyframes firePulse {
-            0%, 85% { opacity: 0; transform: scale(0.8); }
-            90% { opacity: 0.9; transform: scale(1.1); }
-            95% { opacity: 1; transform: scale(1.2); filter: blur(50px); }
-            100% { opacity: 0; transform: scale(1); }
-        }
-
-        .ticker-wrap {
-            width: 100%; background: #000; color: white;
-            padding: 15px 0; border-top: 4px solid var(--orange);
-            overflow: hidden;
-            font-family: 'Arial Black', Gadget, sans-serif;
-        }
-
         .ticker {
-            display: inline-block; white-space: nowrap;
+            display: inline-block;
+            white-space: nowrap;
             animation: scroll 25s linear infinite;
+            padding-top: 4px; /* Center text vertically */
+        }
+
+        .ticker-item {
+            display: inline-block;
+            padding: 0 50px;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #ddd;
+            outline: none;
+        }
+
+        /* Highlight specific words in ticker with Gold color */
+        .highlight {
+            color: var(--tech-gold);
         }
 
         @keyframes scroll {
             from { transform: translateX(1920px); }
             to { transform: translateX(-100%); }
         }
-
-        .ticker-item {
-            display: inline-block; padding: 0 60px;
-            font-size: 28px; font-weight: bold; letter-spacing: 2px;
-            outline: none;
-        }
     </style>
 </head>
 <body>
 
-    <div class="bottom-overlay">
-        <div class="main-info">
-            <div class="logo-container">
-                <img src="hills_logo.png" alt="Hills Shillong Logo">
-            </div>
-            
-            <div class="text-box">
-                <div class="fire-bg"></div>
-                <h1 class="main-title" contenteditable="true">HILLS PAID SCRIMS</h1>
-            </div>
+    <div class="top-row">
+        <div class="logo-container">
+            <img src="hills_logo.png" alt="Logo">
         </div>
+        
+        <div class="text-box">
+            <h1 class="main-title" contenteditable="true">HILLS PAID SCRIMS</h1>
+        </div>
+    </div>
 
-        <div class="ticker-wrap">
-            <div class="ticker">
-                <span class="ticker-item" contenteditable="true">🔥 REGISTRATION OPEN</span>
-                <span class="ticker-item" contenteditable="true">💰 PRIZE POOL: 500</span>
-                <span class="ticker-item" contenteditable="true">📺 WATCH LIVE ON MOBILE</span>
-                <span class="ticker-item" contenteditable="true">🎮 NEXT MATCH AT: Check Whatsapp Group</span>
-                <span class="ticker-item" contenteditable="true">❤️ LIKE AND SUB</span>
-            </div>
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span class="ticker-item" contenteditable="true">🔥 REGISTRATION OPEN</span>
+            <span class="ticker-item" contenteditable="true"><span class="highlight">💰</span> PRIZE POOL: 500</span>
+            <span class="ticker-item" contenteditable="true">📺 WATCH LIVE ON MOBILE</span>
+            <span class="ticker-item" contenteditable="true">🎮 NEXT MATCH AT: <span class="highlight">Check Whatsapp</span></span>
+            <span class="ticker-item" contenteditable="true">❤️ LIKE AND SUB</span>
         </div>
     </div>
 
